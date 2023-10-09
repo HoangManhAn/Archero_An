@@ -1,0 +1,216 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEditor;
+using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
+
+public class Acher : Minion
+{
+
+
+    public Transform throwPoint;
+    public Arrow arrowPrefab;
+
+    private void Update()
+    {
+        if (GameManager.Ins.IsState(GameState.GamePlay))
+        {
+            if (!IsDead)
+            {
+                stateMachine?.Execute();
+            }
+            else
+            {
+                stateMachine.ChangeState(PauseState);
+            }
+        }
+        else
+        {
+            stateMachine.ChangeState(PauseState);
+        }
+
+
+    }
+
+    public override void OnInit()
+    {
+        base.OnInit();
+        hp = 200f;
+        attackRange = 10f;
+        GetHealthBar(200f);
+        isCanMove = true;
+        stateMachine.ChangeState(IdleState);
+    }
+
+
+    public void Attack()
+    {
+        //To do Attack
+        Arrow arrow = Instantiate(arrowPrefab, throwPoint.position, throwPoint.rotation);
+        arrow.OnInit(DirectTarget());
+    }
+
+
+    public Vector3 DirectTarget()
+    {
+        Vector3 direct = target.TF.position - TF.position;
+        //transform.forward = direct.normalized;
+
+        return direct;
+    }
+
+    public void SetTarget(Hero hero)
+    {
+        this.target = hero;
+
+        if (IsTargetInRange())
+        {
+            stateMachine.ChangeState(AttackState);
+        }
+        else if (Target != null)
+        {
+            stateMachine.ChangeState(PatrolState);
+        }
+        else
+        {
+            stateMachine.ChangeState(IdleState);
+        }
+    }
+
+    private void IdleState(ref Action onEnter, ref Action onExecute, ref Action onExit)
+    {
+        float timer = 0f;
+        float randomTime = 0f;
+
+        onEnter = () =>
+        {
+            timer = 0;
+            randomTime = UnityEngine.Random.Range(2f, 4f);
+           
+        };
+
+        onExecute = () =>
+        {
+            timer += Time.deltaTime;
+
+            if (timer < randomTime)
+            {
+                stateMachine.ChangeState(PatrolState);
+            }
+        };
+
+        onExit = () =>
+        {
+
+        };
+    }
+
+    private void PatrolState(ref Action onEnter, ref Action onExecute, ref Action onExit)
+    {
+        float timer = 0f;
+        float randomTime = 0f;
+
+        onEnter = () =>
+        {
+            timer = 0;
+            randomTime = UnityEngine.Random.Range(2f, 4f);
+        };
+
+        onExecute = () =>
+        {
+            timer += Time.deltaTime;
+
+            if (Target != null)
+            {
+
+                if (IsTargetInRange())
+                {
+                    stateMachine.ChangeState(AttackState);
+                }
+                else
+                {
+                    //MoveAround(tf.position + 3f * RandomDirect());
+                    MoveToHero();
+                }
+            }
+            else
+            {
+                if (timer < randomTime)
+                {
+                    
+                    MoveAround(TF.position + 3f * RandomDirect());
+                }
+                else
+                {
+                    stateMachine.ChangeState(IdleState);
+                }
+            }
+        };
+
+        onExit = () =>
+        {
+
+        };
+    }
+
+    private void AttackState(ref Action onEnter, ref Action onExecute, ref Action onExit)
+    {
+        float timer = 0f;
+
+        onEnter = () =>
+        {
+            if (Target != null)
+            {
+                //Doi huong enemy toi huong cua player
+                ChangeDirect();
+
+                Attack();
+            }
+
+            timer = 0f;
+        };
+
+        onExecute = () =>
+        {
+            timer += Time.deltaTime;
+
+            if (timer >= 1.5f)
+            {
+                stateMachine.ChangeState(PatrolState);
+            }
+        };
+
+        onExit = () =>
+        {
+
+        };
+    }
+
+    private void PauseState(ref Action onEnter, ref Action onExecute, ref Action onExit)
+    {
+
+        onEnter = () =>
+        {
+            OnStopMove();
+        };
+
+        onExecute = () =>
+        {
+
+            if (!GameManager.Ins.IsState(GameState.Pause))
+            {
+                stateMachine.ChangeState(PatrolState);
+            }
+
+        };
+
+        onExit = () =>
+        {
+
+        };
+    }
+
+
+
+}
