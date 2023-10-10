@@ -7,7 +7,7 @@ public class AcherAttackRange : MonoBehaviour
     public Acher acher;
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Hero"))
+        if (other.CompareTag(Constant.TAG_HERO))
         {
             acher.SetTarget(other.GetComponent<Hero>());
 
@@ -15,7 +15,7 @@ public class AcherAttackRange : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Hero"))
+        if (other.CompareTag(Constant.TAG_HERO))
         {
             acher.SetTarget(null);
 

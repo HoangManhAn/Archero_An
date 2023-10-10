@@ -7,7 +7,7 @@ public class BossAttackRange : MonoBehaviour
     public Boss boss;
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Hero"))
+        if (other.CompareTag(Constant.TAG_HERO))
         {
             boss.SetTarget(other.GetComponent<Hero>());
 
@@ -15,7 +15,7 @@ public class BossAttackRange : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Hero"))
+        if (other.CompareTag(Constant.TAG_HERO))
         {
             boss.SetTarget(null);
 

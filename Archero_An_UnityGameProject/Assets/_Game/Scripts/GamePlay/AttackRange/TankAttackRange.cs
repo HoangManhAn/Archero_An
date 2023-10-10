@@ -8,7 +8,7 @@ public class TankAttackRange : MonoBehaviour
     public Tank tank;
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Hero"))
+        if (other.CompareTag(Constant.TAG_HERO))
         {
             tank.SetTarget(other.GetComponent<Hero>());
             
@@ -16,7 +16,7 @@ public class TankAttackRange : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Hero"))
+        if (other.CompareTag(Constant.TAG_HERO))
         {
             tank.SetTarget(null);
 

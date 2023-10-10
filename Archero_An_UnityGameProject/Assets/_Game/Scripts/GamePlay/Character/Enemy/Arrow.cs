@@ -23,12 +23,12 @@ public class Arrow : GameUnit
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Hero"))
+        if (other.CompareTag(Constant.TAG_HERO))
         {
             other.GetComponent<Character>().OnHit(50f);
             OnDespawn();
         }
-        if(other.CompareTag("Wall"))
+        if(other.CompareTag(Constant.TAG_WALL))
         {
             OnDespawn();
         }

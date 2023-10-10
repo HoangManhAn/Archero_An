@@ -7,7 +7,7 @@ public class FlyAttackRange : MonoBehaviour
     public Fly fly;
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Hero"))
+        if (other.CompareTag(Constant.TAG_HERO))
         {
             fly.SetTarget(other.GetComponent<Hero>());
 
@@ -15,7 +15,7 @@ public class FlyAttackRange : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Hero"))
+        if (other.CompareTag(Constant.TAG_HERO))
         {
             fly.SetTarget(null);
 

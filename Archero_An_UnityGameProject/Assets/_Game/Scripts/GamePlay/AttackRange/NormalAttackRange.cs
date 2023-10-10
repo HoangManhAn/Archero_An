@@ -8,7 +8,7 @@ public class NormalAttackRange : MonoBehaviour
     public Normal normal;
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Hero"))
+        if (other.CompareTag(Constant.TAG_ENEMY))
         {
             normal.SetTarget(other.GetComponent<Hero>());
             
@@ -16,7 +16,7 @@ public class NormalAttackRange : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Hero"))
+        if (other.CompareTag(Constant.TAG_ENEMY))
         {
             normal.SetTarget(null);
 

@@ -87,7 +87,7 @@ public class Tank : Minion
             randomTime = UnityEngine.Random.Range(3f, 4f);
 
             OnStopMove();
-            ChangeAnim("idle");
+            ChangeAnim(Constant.ANIM_IDLE);
         };
 
         onExecute = () =>
@@ -131,7 +131,7 @@ public class Tank : Minion
                 else
                 {
                     agent.speed = 5f;
-                    ChangeAnim("run");
+                    ChangeAnim(Constant.ANIM_RUN);
                     MoveToHero();
                 }
             }
@@ -140,7 +140,7 @@ public class Tank : Minion
                 if (timer < randomTime)
                 {
                     agent.speed = 3f;
-                    ChangeAnim("run");
+                    ChangeAnim(Constant.ANIM_RUN);
                     MoveAround(TF.position + 3f * RandomDirect());
                 }
                 else
@@ -167,7 +167,7 @@ public class Tank : Minion
                 //Doi huong enemy toi huong cua player
                 ChangeDirect();
 
-                ChangeAnim("attack");
+                ChangeAnim(Constant.ANIM_ATTACK);
                 agent.speed = 10f;
                 MoveToHero();
             }

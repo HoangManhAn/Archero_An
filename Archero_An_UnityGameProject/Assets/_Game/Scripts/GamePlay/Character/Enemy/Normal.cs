@@ -68,7 +68,7 @@ public class Normal : Minion
             randomTime = UnityEngine.Random.Range(3f, 4f);
 
             OnStopMove();
-            ChangeAnim("idle");
+            ChangeAnim(Constant.ANIM_IDLE);
         };
 
         onExecute = () =>
@@ -112,7 +112,7 @@ public class Normal : Minion
                 else
                 {
                     agent.speed = 5f;
-                    ChangeAnim("run");
+                    ChangeAnim(Constant.ANIM_RUN);
                     MoveToHero();
                 }
             }
@@ -121,7 +121,7 @@ public class Normal : Minion
                 if (timer < randomTime)
                 {
                     agent.speed = 3f;
-                    ChangeAnim("run");
+                    ChangeAnim(Constant.ANIM_RUN);
                     MoveAround(TF.position + 3f * RandomDirect());
                 }
                 else
@@ -150,7 +150,7 @@ public class Normal : Minion
                 //Doi huong enemy toi huong cua player
                 ChangeDirect();
 
-                ChangeAnim("attack");
+                ChangeAnim(Constant.ANIM_ATTACK);
                 agent.speed = 10f;
                 MoveToHero();
             }

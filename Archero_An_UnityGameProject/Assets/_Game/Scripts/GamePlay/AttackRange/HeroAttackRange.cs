@@ -8,7 +8,7 @@ public class HeroAttackRange : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.CompareTag(Constant.TAG_ENEMY))
         {
             hero.targets.Add(other.GetComponent<Enemy>());
             
@@ -17,7 +17,7 @@ public class HeroAttackRange : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.CompareTag(Constant.TAG_ENEMY))
         {
             hero.targets.Remove(other.GetComponent<Enemy>());
         }

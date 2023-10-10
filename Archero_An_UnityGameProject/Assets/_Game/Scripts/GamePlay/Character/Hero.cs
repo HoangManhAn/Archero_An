@@ -60,7 +60,7 @@ public class Hero : Character
             if (joyStickInput.magnitude > 0f)
             {
                 //isMoving = true;
-                ChangeAnim("run");
+                ChangeAnim(Constant.ANIM_RUN);
                 HeroMove(joyStickInput);
             }
             else
@@ -70,7 +70,7 @@ public class Hero : Character
 
                 if (targets.Count <= 0)
                 {
-                    ChangeAnim("idle");
+                    ChangeAnim(Constant.ANIM_IDLE);
 
                 }
                 else
@@ -123,7 +123,7 @@ public class Hero : Character
     {
         base.OnDeath();
         OnStopMove();
-        ChangeAnim("die");
+        ChangeAnim(Constant.ANIM_DIE);
         Invoke(nameof(OnDespawn), 1.5f);
     }
 
@@ -254,7 +254,7 @@ public class Hero : Character
     public override void OnAttack()
     {
         isAttack = true;
-        ChangeAnim("attack");
+        ChangeAnim(Constant.ANIM_ATTACK);
         Invoke(nameof(ResetAttack), 0.4f);
         //StartCoroutine(IEdelayAction(ResetAttack, 0.4f));
         currentWeapon.Fire(GetDirect());

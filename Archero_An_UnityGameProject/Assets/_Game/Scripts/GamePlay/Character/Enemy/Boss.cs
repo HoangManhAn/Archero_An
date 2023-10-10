@@ -115,7 +115,7 @@ public class Boss : Enemy
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Hero"))
+        if (other.CompareTag(Constant.TAG_HERO))
         {
             //Debug.Log(50);
             other.GetComponent<Character>().OnHit(50f);
@@ -133,7 +133,7 @@ public class Boss : Enemy
             randomTime = UnityEngine.Random.Range(3f, 4f);
 
             OnStopMove();
-            ChangeAnim("idle");
+            ChangeAnim(Constant.ANIM_IDLE);
         };
 
         onExecute = () =>
@@ -181,7 +181,7 @@ public class Boss : Enemy
                 else
                 {
                     agent.speed = 5f;
-                    ChangeAnim("run");
+                    ChangeAnim(Constant.ANIM_RUN);
                     MoveToHero();
                 }
             }
@@ -190,7 +190,7 @@ public class Boss : Enemy
                 if (timer < randomTime)
                 {
                     agent.speed = 3f;
-                    ChangeAnim("run");
+                    ChangeAnim(Constant.ANIM_RUN);
                     MoveAround(TF.position + 5f * RandomDirect());
                 }
                 else
@@ -257,7 +257,7 @@ public class Boss : Enemy
                 {
                     OnStopMove();
                     slashAttackArea.SetActive(true);
-                    ChangeAnim("slash");
+                    ChangeAnim(Constant.ANIM_SLASH);
                     Invoke(nameof(ResetAttack), 0.4f);
                 }
 

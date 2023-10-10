@@ -149,7 +149,7 @@ public class Fly : Minion
                 }
                 else
                 {
-                    ChangeAnim("run");
+                    ChangeAnim(Constant.ANIM_RUN);
                     FlyToHero();
                 }
             }
@@ -158,7 +158,7 @@ public class Fly : Minion
                 if (timer < randomTime)
                 {
 
-                    ChangeAnim("run");
+                    ChangeAnim(Constant.ANIM_RUN);
                     //FlyAround();
                     FlyToHero();
                 }
@@ -192,7 +192,7 @@ public class Fly : Minion
                     ChangeDirect();
 
                     peckAttackArea.SetActive(true);
-                    ChangeAnim("attack");
+                    ChangeAnim(Constant.ANIM_ATTACK);
                     Invoke(nameof(ResetAttack), 1f);
                 }
 

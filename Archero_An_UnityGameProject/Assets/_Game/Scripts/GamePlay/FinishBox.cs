@@ -7,7 +7,7 @@ public class FinishBox : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Hero") && LevelManager.Ins.currentLevel.enemies.Count == 0)
+        if (other.CompareTag(Constant.TAG_HERO) && LevelManager.Ins.currentLevel.enemies.Count == 0)
         {
             LevelManager.Ins.NextLevel();
         }

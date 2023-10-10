@@ -31,7 +31,7 @@ public class Bullet : GameUnit
             other.GetComponent<Character>().OnHit(100f);
             OnDespawn();
         }
-        if (other.CompareTag("Wall"))
+        if (other.CompareTag(Constant.TAG_WALL))
         {
             OnDespawn();
         }

@@ -47,7 +47,7 @@ public class Enemy : Character
         base.OnDeath();
         LevelManager.Ins.hero.targets.Remove(this);
         OnStopMove();
-        ChangeAnim("die");
+        ChangeAnim(Constant.ANIM_DIE);
         Invoke(nameof(OnDespawn), 1f);
     }
 

@@ -69,11 +69,11 @@ public class Character : GameUnit
     public virtual void ResetAttack()
     {
         if (IsDead) 
-            ChangeAnim("die");
+            ChangeAnim(Constant.ANIM_DIE);
         else
         {
             isAttack = false;
-            ChangeAnim("idle");
+            ChangeAnim(Constant.ANIM_IDLE);
         }
     }
 
