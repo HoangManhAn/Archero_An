@@ -9,11 +9,10 @@ public enum GameState { MainMenu, GamePlay, Pause, Finish }
 
 public class GameManager : Singleton<GameManager>
 {
-    //[SerializeField] UserData userData;
-    //[SerializeField] CSVData csv;
+    
     private static GameState gameState = GameState.MainMenu;
 
-    // Start is called before the first frame update
+    
     protected void Awake()
     {
         //base.Awake();
@@ -28,12 +27,19 @@ public class GameManager : Singleton<GameManager>
             Screen.SetResolution(Mathf.RoundToInt(ratio * (float)maxScreenHeight), maxScreenHeight, true);
         }
 
-        //csv.OnInit();
-        UserData.Ins.OnInitData();
+        
 
         ChangeState(GameState.MainMenu);
         UIManager.Ins.OpenUI<MainMenu>();
         LevelManager.Ins.hero.joyStick.gameObject.SetActive(false);
+    }
+
+    private void Start()
+    {
+        if(!PlayerPrefs.HasKey(PrefConst.COIN_KEY))
+            Pref.Coins = 10000;
+
+        GUIManager.Ins.UpdateCoins();
     }
 
     public void ChangeState(GameState state)

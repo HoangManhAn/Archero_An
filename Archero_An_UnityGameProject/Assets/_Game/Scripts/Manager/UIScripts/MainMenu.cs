@@ -19,7 +19,7 @@ public class MainMenu : UICanvas
 
     public void ShopButton()
     {
-        UIManager.Ins.OpenUI<Shop>();
+        //UIManager.Ins.OpenUI<Shop>();
         Close(0);
     }
 }
